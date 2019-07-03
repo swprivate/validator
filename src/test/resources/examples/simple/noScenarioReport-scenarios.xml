@@ -18,23 +18,19 @@
   ~ under the License.
   -->
 
-<scenarios xmlns="http://www.xoev.de/de/validator/framework/1/scenarios" frameworkVersion="1.1.2">
+<scenarios xmlns="http://www.xoev.de/de/validator/framework/1/scenarios" frameworkVersion="1.2.0">
     <name>HTML-TestSuite</name>
     <date>2017-08-08</date>
     <description>
         <p>Szenario für Tests</p>
     </description>
-
     <scenario>
         <name>Simple</name>
         <description>
             <p>Nur Schemaprüfung.</p>
         </description>
-        <namespace prefix="cri">http://www.xoev.de/de/validator/framework/1/createreportinput</namespace>
         <namespace prefix="test">http://validator.kosit.de/test-sample</namespace>
-        <namespace prefix="rpt">http://validator.kosit.de/test-report</namespace>
         <match>/test:simple</match>
-
         <validateWithXmlSchema>
             <resource>
                 <name>Sample Schema</name>
@@ -47,38 +43,9 @@
                 <location>report.xsl</location>
             </resource>
         </createReport>
-        <acceptMatch>count(//cri:xmlSyntaxError) = 0</acceptMatch>
+        <acceptMatch>count(//test:xmlSyntaxError) = 0</acceptMatch>
     </scenario>
 
-    <scenario>
-        <name>NoAcceptMatch</name>
-        <description>
-            <p>Nur Schemaprüfung. Keine AcceptMatch deklaration</p>
-            <p>Testen, ob auch alte Konfiguration funktionioeren</p>
-        </description>
-        <namespace prefix="test">http://validator.kosit.de/test-sample</namespace>
-        <match>/test:foo</match>
-
-        <validateWithXmlSchema>
-            <resource>
-                <name>Sample Schema</name>
-                <location>simple.xsd</location>
-            </resource>
-        </validateWithXmlSchema>
-        <createReport>
-            <resource>
-                <name>Report für eRechnung</name>
-                <location>report.xsl</location>
-            </resource>
-        </createReport>
-    </scenario>
-
-
-    <noScenarioReport>
-        <resource>
-            <name>default</name>
-            <location>noScenario.xsl</location>
-        </resource>
-    </noScenarioReport>
+    <!-- NoScenario report omitted-->
 
 </scenarios>

@@ -25,10 +25,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.validation.Schema;
 
 import org.apache.commons.lang3.NotImplementedException;
-import org.w3c.dom.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,6 +44,7 @@ import de.kosit.validationtool.model.scenarios.ValidateWithXmlSchema;
 
 import net.sf.saxon.s9api.XPathExecutable;
 import net.sf.saxon.s9api.XPathSelector;
+import net.sf.saxon.s9api.XdmNode;
 import net.sf.saxon.s9api.XsltExecutable;
 
 /**
@@ -70,10 +71,21 @@ public abstract class BaseScenario {
     private XPathExecutable matchExecutable;
 
     private XPathExecutable acceptExecutable;
+
     private Schema schema;
+
     private List<Transformation> schematronValidations;
+
     private ContentRepository repository;
+
     private Transformation reportTransformation;
+
+    private boolean noScenarioConfiguration = false;
+
+    @XmlTransient
+    public boolean isNoScenarioConfiguration() {
+        return this.noScenarioConfiguration;
+    }
 
     /**
      * Gibt eine Transformation zurück.
@@ -144,7 +156,7 @@ public abstract class BaseScenario {
      * Der XPath-Selector zur Identifikation des Scenarios.
      * 
      * @return vorbereiteten selector
-     * @see {@link ScenarioRepository#selectScenario(Document)}.
+     * @see {@link ScenarioRepository#selectScenario(XdmNode)}.
      */
     public XPathSelector getSelector() {
         if (this.matchExecutable == null) {
@@ -206,4 +218,7 @@ public abstract class BaseScenario {
      */
     public abstract CreateReportType getCreateReport();
 
+    public void setNoScenarioConfiguration(final boolean b) {
+        this.noScenarioConfiguration = b;
+    }
 }

@@ -14,6 +14,7 @@
             <xsl:apply-templates select="in:engine" mode="copy-to-report-ns" />
             <xsl:apply-templates select="in:timestamp" mode="copy-to-report-ns" />
             <xsl:apply-templates select="in:documentIdentification" mode="copy-to-report-ns" />
+            <xsl:apply-templates select="in:processingError" mode="copy-to-report-ns" />
             <no:message>The document does not match any of the configured scenarios of this validator instance.</no:message>
         </no:NoScenarioFound>
     </xsl:template>

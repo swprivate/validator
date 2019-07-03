@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import de.kosit.validationtool.api.AcceptRecommendation;
 import de.kosit.validationtool.api.Check;
 import de.kosit.validationtool.api.CheckConfiguration;
 import de.kosit.validationtool.api.Input;
@@ -130,7 +131,9 @@ public class DefaultCheck implements Check {
     }
 
     private Result createResult(final Bag t) {
-        final DefaultResult result = new DefaultResult(t.getReport(), t.getAcceptStatus(), new HtmlExtractor(this.contentRepository));
+        final boolean isFallbackScenario = t.getScenarioSelectionResult().getObject().isNoScenarioConfiguration();
+        final AcceptRecommendation acceptStatus = isFallbackScenario ? AcceptRecommendation.REJECT : t.getAcceptStatus();
+        final DefaultResult result = new DefaultResult(t.getReport(), acceptStatus, new HtmlExtractor(this.contentRepository));
         result.setReportInput(t.getReportInput());
         if (t.getSchemaValidationResult() != null) {
             result.setSchemaViolations(convertErrors(t.getSchemaValidationResult().getErrors()));

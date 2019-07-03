@@ -49,11 +49,23 @@ public class Helper {
 
         public static final URI SCENARIOS = ROOT.resolve("scenarios.xml");
 
+        public static final URI NO_SCNENARIO_REPORT_SCENARIOS = ROOT.resolve("noScenarioReport-scenarios.xml");
+
         public static final URI REPOSITORY = ROOT.resolve("repository/");
 
         public static final URI INVALID = ROOT.resolve("input/simple-invalid.xml");
 
         public static final URI UNKNOWN = ROOT.resolve("input/unknown.xml");
+    }
+
+    public static class UBL {
+
+        public static final URI SAMPLE_DIR = EXAMPLES_DIR.resolve("UBLReady/");
+
+        public static final URI SAMPLE = SAMPLE_DIR.resolve("UBLReady_EU_UBL-NL_20170102_FULL.xml");
+
+        public static final URI SAMPLE2 = SAMPLE_DIR.resolve("UBLReady_EU_UBL-NL_20170102_FULL-invalid.xml");
+
     }
 
     public static final URI SOURCE_ROOT = Paths.get("src/main/resources").toUri();
@@ -78,13 +90,13 @@ public class Helper {
 
     public static final URI NOT_EXISTING = EXAMPLES_DIR.resolve("doesnotexist");
 
-    public static final URI SAMPLE_DIR = EXAMPLES_DIR.resolve("UBLReady/");
+
 
     public static final URI SAMPLE_XSLT = EXAMPLES_DIR.resolve("repository/resources/eRechnung/report.xsl");
 
-    public static final URI SAMPLE = SAMPLE_DIR.resolve("UBLReady_EU_UBL-NL_20170102_FULL.xml");
 
-    public static final URI SAMPLE2 = SAMPLE_DIR.resolve("UBLReady_EU_UBL-NL_20170102_FULL-invalid.xml");
+
+
 
     /**
      * Lädt ein XML-Dokument von der gegebenen URL

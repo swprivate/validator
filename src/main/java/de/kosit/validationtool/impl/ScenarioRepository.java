@@ -172,6 +172,7 @@ public class ScenarioRepository {
             resourceType.setLocation("classpath:/noscenario/noscenarioReport.xsl");
             reportType.setResource(resourceType);
         }
+        t.setNoScenarioConfiguration(true);
         t.initialize(this.repository, true);
         // always reject
         t.setAcceptMatch("count(/)<0");
