@@ -20,7 +20,7 @@
 
 <!-- $Id: assertions.xsd 7554 2017-09-13 14:27:21Z fbuettner $ -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:a="http://www.xoev.de/de/validator/framework/1/assertions"
-           targetNamespace="http://www.xoev.de/de/validator/framework/1/assertions" version="1.0.0"
+           targetNamespace="http://www.xoev.de/de/validator/framework/1/assertions" version="1.2.0"
            elementFormDefault="qualified"
            attributeFormDefault="unqualified">
 

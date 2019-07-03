@@ -158,6 +158,9 @@ public class ContentRepository {
     }
 
     private Source resolve(final URI source) {
+        if ("classpath".equals(source.getScheme())) {
+            return new StreamSource(ContentRepository.class.getResourceAsStream(source.getPath()));
+        }
         final URI resolved = RelativeUriResolver.resolve(source, this.repository);
         return new StreamSource(resolved.toASCIIString());
     }

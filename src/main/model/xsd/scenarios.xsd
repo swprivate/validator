@@ -20,7 +20,7 @@
 
 <!-- $Id$ -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:s="http://www.xoev.de/de/validator/framework/1/scenarios"
-           targetNamespace="http://www.xoev.de/de/validator/framework/1/scenarios" version="1.1.0" elementFormDefault="qualified"
+           targetNamespace="http://www.xoev.de/de/validator/framework/1/scenarios" version="1.2.0" elementFormDefault="qualified"
            attributeFormDefault="unqualified">
 
     <xs:element name="scenarios">
@@ -31,7 +31,7 @@
                 <xs:element name="date" type="xs:date"/>
                 <xs:element name="description" type="s:DescriptionType"/>
                 <xs:element ref="s:scenario" minOccurs="1" maxOccurs="unbounded"/>
-                <xs:element name="noScenarioReport" type="s:NoScenarioReportType"/>
+                <xs:element name="noScenarioReport" minOccurs="0" type="s:NoScenarioReportType" />
             </xs:sequence>
             <xs:attribute name="frameworkVersion" type="xs:string" use="required"/>
         </xs:complexType>

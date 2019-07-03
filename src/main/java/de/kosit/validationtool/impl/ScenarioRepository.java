@@ -39,6 +39,7 @@ import de.kosit.validationtool.impl.model.Result;
 import de.kosit.validationtool.impl.tasks.DocumentParseAction;
 import de.kosit.validationtool.model.reportInput.XMLSyntaxError;
 import de.kosit.validationtool.model.scenarios.CreateReportType;
+import de.kosit.validationtool.model.scenarios.ResourceType;
 import de.kosit.validationtool.model.scenarios.ScenarioType;
 import de.kosit.validationtool.model.scenarios.Scenarios;
 
@@ -60,7 +61,6 @@ public class ScenarioRepository {
     private static final String SUPPORTED_MAJOR_VERSION = "1";
 
     private static final String SUPPORTED_MAJOR_VERSION_SCHEMA = "http://www.xoev.de/de/validator/framework/1/scenarios";
-
 
     @Getter(value = AccessLevel.PRIVATE)
     private final ContentRepository repository;
@@ -102,8 +102,6 @@ public class ScenarioRepository {
             throw new IllegalStateException("Error reading definition file");
         }
     }
-
-
 
     /**
      * Initialisiert das Repository mit der angegebenen Konfiguration.
@@ -166,7 +164,14 @@ public class ScenarioRepository {
         final ScenarioType t = new ScenarioType();
         t.setName("Fallback-Scenario");
         final CreateReportType reportType = new CreateReportType();
-        reportType.setResource(this.scenarios.getNoScenarioReport().getResource());
+        if (this.scenarios.getNoScenarioReport() != null) {
+            reportType.setResource(this.scenarios.getNoScenarioReport().getResource());
+        } else {
+            final ResourceType resourceType = new ResourceType();
+            resourceType.setName("default report generator");
+            resourceType.setLocation("classpath:/noscenario/noscenarioReport.xsl");
+            reportType.setResource(resourceType);
+        }
         t.initialize(this.repository, true);
         // always reject
         t.setAcceptMatch("count(/)<0");
