@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.validation.Schema;
 
 import org.apache.commons.lang3.NotImplementedException;
@@ -79,13 +78,6 @@ public abstract class BaseScenario {
     private ContentRepository repository;
 
     private Transformation reportTransformation;
-
-    private boolean noScenarioConfiguration = false;
-
-    @XmlTransient
-    public boolean isNoScenarioConfiguration() {
-        return this.noScenarioConfiguration;
-    }
 
     /**
      * Gibt eine Transformation zurück.
@@ -218,7 +210,4 @@ public abstract class BaseScenario {
      */
     public abstract CreateReportType getCreateReport();
 
-    public void setNoScenarioConfiguration(final boolean b) {
-        this.noScenarioConfiguration = b;
-    }
 }
