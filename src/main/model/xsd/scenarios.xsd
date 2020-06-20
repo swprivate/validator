@@ -17,8 +17,6 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-
-<!-- $Id$ -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:s="http://www.xoev.de/de/validator/framework/1/scenarios" targetNamespace="http://www.xoev.de/de/validator/framework/1/scenarios" version="1.1.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
 
     <xs:element name="scenarios">
@@ -35,7 +33,8 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="scenario" type="s:ScenarioType" />
+<!-- head of substitution group -->
+    <xs:element name="scenario"/>
 
     <xs:complexType name="NoScenarioReportType">
         <xs:sequence>
@@ -76,6 +75,9 @@
         <xs:list itemType="xs:token" />
     </xs:simpleType>
 
+
+<xs:element name="fullScenario" type="s:ScenarioType" substitutionGroup="s:scenario"/>
+
     <xs:complexType name="ScenarioType">
         <xs:sequence>
             <xs:element name="name" type="xs:token" />
@@ -88,6 +90,31 @@
             <!-- Optional da nachträglich eingeführt -->
             <!-- An XPATH expression to be applied to a generated validation report as defined in the createReport element -->
             <xs:element name="acceptMatch" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+<xs:element name="fallbackScenario" type="s:FallbackScenarioType" substitutionGroup="s:scenario"/>
+    <xs:complexType name="FallbackScenarioType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:token" />
+            <xs:element minOccurs="0" name="description" type="s:DescriptionType" />
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="namespace" type="s:NamespaceType" />
+            
+            <xs:element name="createReport" type="s:CreateReportType" />
+            
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="NoMatchedScenarioType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:token" />
+            <xs:element minOccurs="0" name="description" type="s:DescriptionType" />
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="namespace" type="s:NamespaceType" />
+            <xs:element name="match" type="xs:string" />
+            <xs:element name="validateWithXmlSchema" type="s:ValidateWithXmlSchema" />
+            <xs:element name="validateWithSchematron" maxOccurs="unbounded" minOccurs="0" type="s:ValidateWithSchematron" />
+            <xs:element name="createReport" type="s:CreateReportType" />
+  
         </xs:sequence>
     </xs:complexType>
 
